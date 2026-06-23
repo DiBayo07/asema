@@ -88,29 +88,28 @@ async function submitEnroll() {
   btn.textContent = 'Отправка...';
 
   try {
-    const res = await fetch(API_URL + '/api/apply', {
+    const res = await fetch('https://egbiowrgdhudxmdytmfu.supabase.co/rest/v1/applications', {
       method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
+      headers: {
+        'Content-Type': 'application/json',
+        'apikey': 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImVnYmlvd3JnZGh1ZHhtZHl0bWZ1Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODIyMjUyNzAsImV4cCI6MjA5NzgwMTI3MH0.CG2GFXORqUyR_xu5Ci0KyOFO86fZADQE-ScM3riBr_I',
+        'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImVnYmlvd3JnZGh1ZHhtZHl0bWZ1Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODIyMjUyNzAsImV4cCI6MjA5NzgwMTI3MH0.CG2GFXORqUyR_xu5Ci0KyOFO86fZADQE-ScM3riBr_I',
+        'Prefer': 'return=representation'
+      },
       body: JSON.stringify({ name, phone, sport, age, comment })
     });
-    const data = await res.json();
-    if (data.ok) {
+    if (res.ok) {
       showNotification('Заявка принята! Свяжемся с вами в течение часа.');
       ['enrollName','enrollPhone','enrollSport','enrollAge','enrollComment'].forEach(id => {
         const el = document.getElementById(id);
         if (el) el.value = '';
       });
     } else {
-      showNotification(data.error || 'Ошибка', 'error');
+      const errorData = await res.json();
+      showNotification(errorData.message || 'Ошибка', 'error');
     }
   } catch (e) {
-    const apps = JSON.parse(localStorage.getItem('applications') || '[]');
-    apps.push({ id: Date.now(), name, phone, sport, age, comment, status: 'new' });
-    localStorage.setItem('applications', JSON.stringify(apps));
-    showNotification('Заявка сохранена! Свяжемся с вами в течение часа.');
-    ['enrollName','enrollPhone','enrollSport','enrollAge','enrollComment'].forEach(id => {
-      const el = document.getElementById(id); if (el) el.value = '';
-    });
+    showNotification('Ошибка сети. Попробуйте позже.', 'error');
   } finally {
     btn.disabled = false;
     btn.textContent = 'Отправить Заявку';
@@ -158,7 +157,7 @@ async function doLogin() {
     document.getElementById('loginError').style.display = 'none';
     renderAll();
   } else {
-    document.getElementById('loginError').textContent = 'Неверный логин или пароль (используйте admin/admin)';
+    document.getElementById('loginError').textContent = 'Неверный логин или пароль';
     document.getElementById('loginError').style.display = 'block';
   }
 }

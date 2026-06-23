@@ -48,9 +48,18 @@ if (saved === 'dark') applyTheme(true);
 
 // ====== APPLICATIONS ======
 
+const SUPABASE_URL = 'https://egbiowrgdhudxmdytmfu.supabase.co/rest/v1/applications';
+const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImVnYmlvd3JnZGh1ZHhtZHl0bWZ1Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODIyMjUyNzAsImV4cCI6MjA5NzgwMTI3MH0.CG2GFXORqUyR_xu5Ci0KyOFO86fZADQE-ScM3riBr_I';
+const SUPABASE_HEADERS = {
+  'apikey': SUPABASE_KEY,
+  'Authorization': 'Bearer ' + SUPABASE_KEY,
+  'Content-Type': 'application/json',
+  'Prefer': 'return=representation'
+};
+
 async function load() {
   try {
-    const r = await fetch('/api/applications');
+    const r = await fetch(SUPABASE_URL + '?select=*', { headers: SUPABASE_HEADERS });
     if (!r.ok) return;
     const apps = await r.json();
     const tbody = document.getElementById('tbody');
@@ -93,9 +102,9 @@ async function load() {
 
 async function mark(id, status) {
   try {
-    await fetch('/api/application/' + id + '/status', {
+    await fetch(SUPABASE_URL + '?id=eq.' + id, {
       method: 'PATCH',
-      headers: { 'Content-Type': 'application/json' },
+      headers: SUPABASE_HEADERS,
       body: JSON.stringify({ status })
     });
     load();
@@ -106,7 +115,7 @@ async function mark(id, status) {
 async function del(id) {
   if (!confirm('Удалить заявку N' + id + '?')) return;
   try {
-    await fetch('/api/application/' + id, { method: 'DELETE' });
+    await fetch(SUPABASE_URL + '?id=eq.' + id, { method: 'DELETE', headers: SUPABASE_HEADERS });
     const row = document.getElementById('row-' + id);
     if (row) row.remove();
     load();
@@ -180,7 +189,7 @@ async function deleteTrainer(id) {
 
 async function loadStats() {
   try {
-    const r = await fetch('/api/applications');
+    const r = await fetch(SUPABASE_URL + '?select=*', { headers: SUPABASE_HEADERS });
     if (!r.ok) return;
     const apps = await r.json();
     const bars = document.getElementById('sportBars');
