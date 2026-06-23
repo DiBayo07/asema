@@ -1,0 +1,521 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Алга — Спортивный Комплекс</title>
+  <meta name="description" content="Спортивный комплекс АЛГА — самбо, карате, бокс в Караколе. Профессиональные тренеры, группы для детей и взрослых. Запишитесь онлайн!">
+  <meta name="keywords" content="спортивный комплекс Каракол, самбо, карате, бокс, единоборства, АЛГА, секции для детей">
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Oswald:wght@300;400;600;700&family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+</head>
+<body>
+<!-- SVG ICONS SPRITE -->
+<svg style="display:none" xmlns="http://www.w3.org/2000/svg">
+  <symbol id="icon-target" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></symbol>
+  <symbol id="icon-trophy" viewBox="0 0 24 24"><path d="M6 9H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h2"/><path d="M18 9h2a2 2 0 0 0 2-2V5a2 2 0 0 0-2-2h-2"/><path d="M6 3h12v10a4 4 0 0 1-4 4h-4a4 4 0 0 1-4-4V3z"/><path d="M8 21h8"/><path d="M12 17v4"/></symbol>
+  <symbol id="icon-muscle" viewBox="0 0 24 24"><path d="M6.5 6.5 3 10l3.5 3.5"/><path d="M17.5 6.5 21 10l-3.5 3.5"/><path d="M12 17v4"/><path d="M8 21h8"/><path d="M12 3c-3 0-5 2-5 5v5a5 5 0 0 0 10 0V8c0-3-2-5-5-5z"/></symbol>
+  <symbol id="icon-family" viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></symbol>
+  <symbol id="icon-map-pin" viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></symbol>
+  <symbol id="icon-phone" viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></symbol>
+  <symbol id="icon-mail" viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></symbol>
+  <symbol id="icon-clock" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></symbol>
+  <symbol id="icon-heart" viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></symbol>
+  <symbol id="icon-check" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></symbol>
+  <symbol id="icon-x" viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></symbol>
+  <symbol id="icon-users" viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></symbol>
+  <symbol id="icon-calendar" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></symbol>
+  <symbol id="icon-bar-chart" viewBox="0 0 24 24"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></symbol>
+  <symbol id="icon-edit" viewBox="0 0 24 24"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></symbol>
+</svg>
+
+<!-- NAVIGATION -->
+<nav>
+  <div class="nav-logo">АЛГА</div>
+  <ul class="nav-links">
+    <li><a href="#sports">Виды Спорта</a></li>
+    <li><a href="#trainers">Тренеры</a></li>
+    <li><a href="#gallery">Галерея</a></li>
+    <li><a href="#schedule">Расписание</a></li>
+    <li><a href="#enroll">Записаться</a></li>
+  </ul>
+  <a href="/admin" class="nav-btn desk-only">Панель</a>
+  <button class="hamburger" id="hamburger" aria-label="Меню">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-bg-photo"></div>
+  <div class="hero-bg-lines"></div>
+  <div class="hero-diagonal">
+    <div class="hero-diagonal-photo"></div>
+  </div>
+
+  <div class="hero-content">
+    <div class="hero-tag">Спортивный Комплекс</div>
+    <h1 class="hero-title">
+      СПОРТИВНЫЙ<br>
+      <span>КОМПЛЕКС</span><br>
+      АЛГА
+    </h1>
+    <div class="hero-subtitle">Самбо · Карате · Бокс</div>
+    <p class="hero-desc">
+      Профессиональная подготовка в трёх дисциплинах. Опытные тренеры,
+      современное оборудование, атмосфера победителей. Ваш путь к вершине начинается здесь.
+    </p>
+    <div class="hero-btns">
+      <a href="#enroll" class="btn-primary">Записаться Сейчас</a>
+      <a href="#sports"  class="btn-outline">Узнать Больше</a>
+    </div>
+  </div>
+
+  <div class="hero-stats">
+    <div class="stat">
+      <div class="stat-num" id="c1">0</div>
+      <div class="stat-label">Спортсменов</div>
+    </div>
+    <div class="stat">
+      <div class="stat-num" id="c2">0</div>
+      <div class="stat-label">Тренеров</div>
+    </div>
+    <div class="stat">
+      <div class="stat-num" id="c3">0</div>
+      <div class="stat-label">Чемпионов</div>
+    </div>
+  </div>
+</section>
+
+<!-- SPORTS -->
+<section id="sports">
+  <div class="section-header">
+    <div class="section-tag">Наши Дисциплины</div>
+    <h2 class="section-title">ТРИ ПУТИ<br>К ПОБЕДЕ</h2>
+  </div>
+
+  <div class="sports-grid">
+    <div class="sport-card">
+      <div class="sport-photo-wrap"><img class="sport-photo" src="images/c.jpeg" alt="Самбо" loading="lazy"></div>
+      <div class="sport-body">
+        <div class="sport-num">01</div>
+        <div class="sport-name">САМБО</div>
+        <p class="sport-desc">
+          Советское боевое искусство, сочетающее борьбу и рукопашный бой.
+          Развивает силу, гибкость и тактическое мышление.
+        </p>
+        <ul class="sport-features">
+          <li>Спортивное и боевое самбо</li>
+          <li>Группы с 6 лет</li>
+          <li>Соревнования всех уровней</li>
+          <li>Судейская подготовка</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="sport-card">
+      <div class="sport-photo-wrap"><img class="sport-photo" src="https://images.unsplash.com/photo-1555597673-b21d5c935865?w=700&q=80" alt="Карате" loading="lazy"></div>
+      <div class="sport-body">
+        <div class="sport-num">02</div>
+        <div class="sport-name">КАРАТЕ</div>
+        <p class="sport-desc">
+          Древнее боевое искусство Окинавы. Точность, дисциплина
+          и духовное развитие в каждом движении.
+        </p>
+        <ul class="sport-features">
+          <li>Шотокан и WKF правила</li>
+          <li>Ката и кумитэ</li>
+          <li>Дети от 5 лет</li>
+          <li>Система поясов</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="sport-card">
+      <div class="sport-photo-wrap"><img class="sport-photo" src="https://images.unsplash.com/photo-1549719386-74dfcbf7dbed?w=700&q=80" alt="Бокс" loading="lazy"></div>
+      <div class="sport-body">
+        <div class="sport-num">03</div>
+        <div class="sport-name">БОКС</div>
+        <p class="sport-desc">
+          Благородное искусство кулачного боя. Скорость, выносливость,
+          координация и несгибаемый характер.
+        </p>
+        <ul class="sport-features">
+          <li>Любительский и профи бокс</li>
+          <li>Работа с мешками и лапами</li>
+          <li>Спарринги и соревнования</li>
+          <li>Общефизическая подготовка</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TRAINERS -->
+<section id="trainers">
+  <div class="section-header">
+    <div class="section-tag">Наша Команда</div>
+    <h2 class="section-title">ТРЕНЕРЫ<br>ЧЕМПИОНОВ</h2>
+  </div>
+  <div class="trainers-filter">
+    <button class="filter-btn active" onclick="filterTrainer('all', this)">Все</button>
+    <button class="filter-btn" onclick="filterTrainer('Самбо', this)">Самбо</button>
+    <button class="filter-btn" onclick="filterTrainer('Карате', this)">Карате</button>
+    <button class="filter-btn" onclick="filterTrainer('Бокс', this)">Бокс</button>
+  </div>
+  <div class="trainers-grid" id="trainersGrid"></div>
+</section>
+
+<!-- GALLERY -->
+<section id="gallery">
+  <div class="section-header">
+    <div class="section-tag">Наш Комплекс</div>
+    <h2 class="section-title">ГАЛЕРЕЯ<br>АЛГА</h2>
+  </div>
+
+  <div class="gallery-grid">
+    <div class="gallery-item">
+      <img src="images/g3.jpeg" alt="Тренировка самбо" loading="lazy">
+    </div>
+    <div class="gallery-item">
+      <img src="images/g1.jpeg" alt="Боксёрский зал" loading="lazy">
+    </div>
+    <div class="gallery-item">
+      <img src="images/g5.jpeg" alt="Карате тренировка" loading="lazy">
+    </div>
+    <div class="gallery-item">
+      <img src="images/g4.jpeg" alt="Тренер" loading="lazy">
+    </div>
+    <div class="gallery-item">
+      <img src="images/g6.jpeg" alt="Спортзал" loading="lazy">
+    </div>
+    <div class="gallery-item">
+      <img src="images/g2.jpeg" alt="Тренировка бокс" loading="lazy">
+    </div>
+  </div>
+
+  <div class="gallery-nav">
+    <button class="gallery-nav-btn" onclick="scrollGallery(-300)">←</button>
+    <button class="gallery-nav-btn" onclick="scrollGallery(300)">→</button>
+  </div>
+</section>
+
+<!-- SCHEDULE -->
+<section id="schedule">
+  <div class="section-header">
+    <div class="section-tag">Расписание Занятий</div>
+    <h2 class="section-title">ПЛАН<br>ТРЕНИРОВОК</h2>
+  </div>
+
+  <div class="schedule-filter">
+    <button class="filter-btn active" onclick="setAge('kids', this)">Дети</button>
+    <button class="filter-btn" onclick="setAge('junior', this)">Юниоры</button>
+    <button class="filter-btn" onclick="setAge('adult', this)">Взрослые</button>
+  </div>
+
+  <div class="schedule-grid" id="scheduleGrid"></div>
+</section>
+
+<!-- ENROLL -->
+<section id="enroll">
+  <div class="enroll-inner">
+    <div class="enroll-left">
+      <div class="section-tag">Запись</div>
+      <h2>НАЧНИ ПУТЬ<br><span>К ПОБЕДЕ</span><br>СЕГОДНЯ</h2>
+      <p>Оставьте заявку и наш менеджер свяжется с вами в течение часа.</p>
+      <ul class="enroll-benefits">
+        <li>
+          <div class="benefit-icon"><svg class="icon" width="20" height="20"><use href="#icon-target"/></svg></div>
+          <span>Индивидуальный подход к каждому спортсмену, независимо от уровня подготовки</span>
+        </li>
+        <li>
+          <div class="benefit-icon"><svg class="icon" width="20" height="20"><use href="#icon-trophy"/></svg></div>
+          <span>Участие в городских, региональных и международных соревнованиях</span>
+        </li>
+        <li>
+          <div class="benefit-icon"><svg class="icon" width="20" height="20"><use href="#icon-muscle"/></svg></div>
+          <span>Современные тренажёры и профессиональный инвентарь мировых брендов</span>
+        </li>
+        <li>
+          <div class="benefit-icon"><svg class="icon" width="20" height="20"><use href="#icon-family"/></svg></div>
+          <span>Группы для детей, юниоров и взрослых — найдите свою</span>
+        </li>
+      </ul>
+    </div>
+
+    <div class="enroll-form">
+      <div class="form-title">ЗАЯВКА НА ЗАПИСЬ</div>
+      <div class="form-group">
+        <label>Ваше Имя *</label>
+        <input type="text" id="enrollName" placeholder="Асема Алиева">
+      </div>
+      <div class="form-group">
+        <label>Телефон *</label>
+        <input type="tel" id="enrollPhone" placeholder="+996 (___) __-__-__">
+      </div>
+      <div class="form-group">
+        <label>Вид Спорта *</label>
+        <select id="enrollSport">
+          <option value="">Выберите дисциплину</option>
+          <option value="sambo">Самбо</option>
+          <option value="karate">Карате</option>
+          <option value="boxing">Бокс</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label>Возраст</label>
+        <input type="number" id="enrollAge" placeholder="Например: 12">
+      </div>
+      <div class="form-group">
+        <label>Комментарий</label>
+        <textarea id="enrollComment" placeholder="Опыт, пожелания..."></textarea>
+      </div>
+      <button class="form-submit" onclick="submitEnroll()">Отправить Заявку</button>
+    </div>
+  </div>
+</section>
+
+<!-- MAP -->
+<section id="map-section">
+  <div class="map-inner">
+    <div id="map"></div>
+    <div class="map-card">
+      <h3>Контакты</h3>
+      <ul>
+        <li>
+          <svg class="icon icon-sm"><use href="#icon-map-pin"/></svg>
+          <span>ул. Токтогула 202, Каракол</span>
+        </li>
+        <li>
+          <svg class="icon icon-sm"><use href="#icon-phone"/></svg>
+          <span>+996 226 90 89 90</span>
+        </li>
+        <li>
+          <svg class="icon icon-sm"><use href="#icon-mail"/></svg>
+          <span>info@alga-sport.ru</span>
+        </li>
+        <li>
+          <svg class="icon icon-sm"><use href="#icon-clock"/></svg>
+          <span>Пн–Сб: 9:00–20:00</span>
+        </li>
+      </ul>
+      <a href="#enroll" class="map-btn">Записаться</a>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-top">
+    <div class="footer-brand">
+  <div class="nav-logo">АЛГА</div>
+      <p>Спортивный комплекс нового поколения. Воспитываем чемпионов с душой и характером.</p>
+    </div>
+    <div class="footer-col">
+      <h4>Навигация</h4>
+      <ul>
+        <li><a href="#sports">Виды спорта</a></li>
+        <li><a href="#trainers">Тренеры</a></li>
+        <li><a href="#gallery">Галерея</a></li>
+        <li><a href="#schedule">Расписание</a></li>
+        <li><a href="#enroll">Записаться</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Контакты</h4>
+      <ul class="footer-contacts">
+        <li><a href="#map-section"><svg class="icon icon-sm"><use href="#icon-map-pin"/></svg> ул. Токтогула 202</a></li>
+        <li><a href="#"><svg class="icon icon-sm"><use href="#icon-phone"/></svg> +996 226 90 89 90</a></li>
+        <li><a href="#"><svg class="icon icon-sm"><use href="#icon-mail"/></svg> info@alga-sport.ru</a></li>
+        <li><a href="#"><svg class="icon icon-sm"><use href="#icon-clock"/></svg> Пн–Сб: 9:00–20:00</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Соцсети</h4>
+      <ul>
+        <li><a href="#"><i class="fa-brands fa-instagram insta-icon"></i> Instagram</a></li>
+        <li><a href="#"><i class="fa-brands fa-whatsapp wa-icon"></i> WhatsApp</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>© 2026 Спортивный Комплекс «Алга». Все права защищены.</p>
+    <p>Сделано с <svg class="icon icon-sm icon-footer-heart"><use href="#icon-heart"/></svg> для чемпионов</p>
+  </div>
+</footer>
+
+<!-- ADMIN MODAL -->
+<div id="adminModal">
+  <div class="admin-panel">
+    <div class="admin-header">
+      <h2>ПАНЕЛЬ УПРАВЛЕНИЯ</h2>
+      <button class="admin-close" onclick="closeAdmin()"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button>
+    </div>
+
+    <div id="adminLogin" class="admin-login">
+      <h3>ВХОД В СИСТЕМУ</h3>
+      <p>Введите данные администратора для доступа к панели управления</p>
+      <div class="login-form">
+        <input type="text" id="loginUser" placeholder="Логин" value="admin">
+        <input type="password" id="loginPass" placeholder="Пароль">
+        <button class="login-btn" onclick="doLogin()">Войти</button>
+        <div class="login-error" id="loginError">Неверный логин или пароль</div>
+      </div>
+    </div>
+
+    <div id="adminContent" class="admin-content-hidden">
+      <div class="admin-tabs">
+        <button class="admin-tab active" onclick="switchTab('applications', this)">Заявки</button>
+        <button class="admin-tab" onclick="switchTab('trainers', this)">Тренеры</button>
+        <button class="admin-tab" onclick="switchTab('schedule', this)">Расписание</button>
+        <button class="admin-tab" onclick="switchTab('stats', this)">Статистика</button>
+      </div>
+
+      <div class="admin-body">
+        <div class="tab-content active" id="tab-applications">
+          <div class="admin-section-title">ВХОДЯЩИЕ ЗАЯВКИ</div>
+          <table class="admin-table">
+            <thead>
+              <tr>
+                <th>#</th><th>Имя</th><th>Телефон</th>
+                <th>Секция</th><th>Возраст</th><th>Статус</th><th>Действия</th>
+              </tr>
+            </thead>
+            <tbody id="applicationsBody"></tbody>
+          </table>
+        </div>
+
+        <div class="tab-content" id="tab-trainers">
+          <div class="admin-add-form">
+            <h4>+ Добавить тренера</h4>
+            <div class="admin-form-row">
+              <input type="text" id="trName" placeholder="Имя тренера">
+              <select id="trSport">
+                <option value="sambo">Самбо</option>
+                <option value="karate">Карате</option>
+                <option value="boxing">Бокс</option>
+              </select>
+              <input type="text" id="trTitle" placeholder="Звание / титул">
+              <input type="text" id="trAchieve" placeholder="Достижение">
+            </div>
+            <button class="btn-add" onclick="addTrainer()">Добавить</button>
+          </div>
+          <div class="admin-section-title">СПИСОК ТРЕНЕРОВ</div>
+          <table class="admin-table">
+            <thead>
+              <tr><th>Имя</th><th>Секция</th><th>Звание</th><th>Достижение</th><th>Действия</th></tr>
+            </thead>
+            <tbody id="trainersAdminBody"></tbody>
+          </table>
+        </div>
+
+        <div class="tab-content" id="tab-schedule">
+          <div class="admin-add-form">
+            <h4>+ Добавить занятие</h4>
+            <div class="admin-form-row">
+              <input type="text" id="slotTime" placeholder="Время (09:00)">
+              <select id="slotDay">
+                <option value="Пн">Понедельник</option>
+                <option value="Вт">Вторник</option>
+                <option value="Ср">Среда</option>
+                <option value="Чт">Четверг</option>
+                <option value="Пт">Пятница</option>
+                <option value="Сб">Суббота</option>
+                <option value="Вс">Воскресенье</option>
+              </select>
+              <select id="slotSport">
+                <option value="sambo">Самбо</option>
+                <option value="karate">Карате</option>
+                <option value="boxing">Бокс</option>
+              </select>
+              <input type="text" id="slotTrainer" placeholder="Тренер">
+            </div>
+            <button class="btn-add" onclick="addSlot()">Добавить</button>
+          </div>
+          <div class="admin-section-title">ТЕКУЩЕЕ РАСПИСАНИЕ</div>
+          <table class="admin-table">
+            <thead>
+              <tr><th>День</th><th>Время</th><th>Секция</th><th>Тренер</th><th>Действия</th></tr>
+            </thead>
+            <tbody id="scheduleAdminBody"></tbody>
+          </table>
+        </div>
+
+        <div class="tab-content" id="tab-stats">
+          <div class="admin-section-title">СТАТИСТИКА КОМПЛЕКСА</div>
+          <div class="stats-boxes">
+            <div class="stat-box">
+              <div class="stat-box-num" id="statEnroll">0</div>
+              <div class="stat-box-label">Заявок всего</div>
+            </div>
+            <div class="stat-box">
+              <div class="stat-box-num" id="statTrainers">0</div>
+              <div class="stat-box-label">Тренеров</div>
+            </div>
+            <div class="stat-box">
+              <div class="stat-box-num" id="statSlots">0</div>
+              <div class="stat-box-label">Занятий в неделю</div>
+            </div>
+          </div>
+          <div class="stats-chart">
+            <div class="stats-chart-title">
+              Распределение по секциям
+            </div>
+            <div id="sportBars"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- NOTIFICATION -->
+<div id="notification"></div>
+
+<!-- TRAINER MODAL -->
+<div class="trainer-modal" id="trainerModal">
+  <div class="trainer-modal-content">
+    <button class="trainer-modal-close" onclick="closeTrainerModal()">✕</button>
+    <div class="trainer-modal-body">
+      <img class="trainer-modal-photo" id="modalPhoto" src="" alt="">
+      <div>
+        <div class="trainer-modal-name" id="modalName"></div>
+        <div class="trainer-modal-title" id="modalTitle"></div>
+        <div class="trainer-modal-sport" id="modalSport"></div>
+      </div>
+    </div>
+    <div class="trainer-modal-divider">
+      <div class="trainer-modal-achieve-label">Достижения</div>
+      <div class="trainer-modal-achieve-text" id="modalAchieve"></div>
+    </div>
+    <a class="trainer-modal-enroll" href="#enroll" onclick="closeTrainerModal()">Записаться к тренеру</a>
+  </div>
+</div>
+
+<!-- BACK TO TOP -->
+<button class="back-to-top" id="backToTop" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑</button>
+
+<script src="js/app.js"></script>
+<script src="https://api-maps.yandex.ru/2.1/?lang=ru_RU"></script>
+<script>
+ymaps.ready(function() {
+  var map = new ymaps.Map('map', {
+    center: [42.4907, 78.3936],
+    zoom: 15,
+    controls: ['zoomControl']
+  });
+
+  var placemark = new ymaps.Placemark([42.4907, 78.3936], {
+    hintContent: 'Спорткомплекс АЛГА',
+    balloonContent: 'ул. Токтогула 202'
+  }, {
+    preset: 'islands#darkOrangeDotIcon'
+  });
+
+  map.geoObjects.add(placemark);
+});
+</script>
+
+</body>
+</html>
