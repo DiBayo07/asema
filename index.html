@@ -39,9 +39,9 @@
     <li><a href="#gallery">Галерея</a></li>
     <li><a href="#schedule">Расписание</a></li>
     <li><a href="#enroll">Записаться</a></li>
-    <li class="mobile-only"><a href="javascript:void(0)" onclick="openAdmin()">Панель Администратора</a></li>
+    <li class="mobile-only"><a href="admin.html">Панель Администратора</a></li>
   </ul>
-  <a href="javascript:void(0)" onclick="openAdmin()" class="nav-btn desk-only">Панель</a>
+  <a href="admin.html" class="nav-btn desk-only">Панель</a>
   <button class="hamburger" id="hamburger" aria-label="Меню">
     <span></span><span></span><span></span>
   </button>
@@ -346,130 +346,6 @@
   </div>
 </footer>
 
-<!-- ADMIN MODAL -->
-<div id="adminModal">
-  <div class="admin-panel">
-    <div class="admin-header">
-      <h2>ПАНЕЛЬ УПРАВЛЕНИЯ</h2>
-      <button class="admin-close" onclick="closeAdmin()"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button>
-    </div>
-
-    <div id="adminLogin" class="admin-login">
-      <h3>ВХОД В СИСТЕМУ</h3>
-      <p>Введите данные администратора для доступа к панели управления</p>
-      <div class="login-form">
-        <input type="text" id="loginUser" placeholder="Логин" value="admin">
-        <input type="password" id="loginPass" placeholder="Пароль">
-        <button class="login-btn" onclick="doLogin()">Войти</button>
-        <div class="login-error" id="loginError">Неверный логин или пароль</div>
-      </div>
-    </div>
-
-    <div id="adminContent" class="admin-content-hidden">
-      <div class="admin-tabs">
-        <button class="admin-tab active" onclick="switchTab('applications', this)">Заявки</button>
-        <button class="admin-tab" onclick="switchTab('trainers', this)">Тренеры</button>
-        <button class="admin-tab" onclick="switchTab('schedule', this)">Расписание</button>
-        <button class="admin-tab" onclick="switchTab('stats', this)">Статистика</button>
-      </div>
-
-      <div class="admin-body">
-        <div class="tab-content active" id="tab-applications">
-          <div class="admin-section-title">ВХОДЯЩИЕ ЗАЯВКИ</div>
-          <table class="admin-table">
-            <thead>
-              <tr>
-                <th>#</th><th>Имя</th><th>Телефон</th>
-                <th>Секция</th><th>Возраст</th><th>Статус</th><th>Действия</th>
-              </tr>
-            </thead>
-            <tbody id="applicationsBody"></tbody>
-          </table>
-        </div>
-
-        <div class="tab-content" id="tab-trainers">
-          <div class="admin-add-form">
-            <h4>+ Добавить тренера</h4>
-            <div class="admin-form-row">
-              <input type="text" id="trName" placeholder="Имя тренера">
-              <select id="trSport">
-                <option value="sambo">Самбо</option>
-                <option value="karate">Карате</option>
-                <option value="boxing">Бокс</option>
-              </select>
-              <input type="text" id="trTitle" placeholder="Звание / титул">
-              <input type="text" id="trAchieve" placeholder="Достижение">
-            </div>
-            <button class="btn-add" onclick="addTrainer()">Добавить</button>
-          </div>
-          <div class="admin-section-title">СПИСОК ТРЕНЕРОВ</div>
-          <table class="admin-table">
-            <thead>
-              <tr><th>Имя</th><th>Секция</th><th>Звание</th><th>Достижение</th><th>Действия</th></tr>
-            </thead>
-            <tbody id="trainersAdminBody"></tbody>
-          </table>
-        </div>
-
-        <div class="tab-content" id="tab-schedule">
-          <div class="admin-add-form">
-            <h4>+ Добавить занятие</h4>
-            <div class="admin-form-row">
-              <input type="text" id="slotTime" placeholder="Время (09:00)">
-              <select id="slotDay">
-                <option value="Пн">Понедельник</option>
-                <option value="Вт">Вторник</option>
-                <option value="Ср">Среда</option>
-                <option value="Чт">Четверг</option>
-                <option value="Пт">Пятница</option>
-                <option value="Сб">Суббота</option>
-                <option value="Вс">Воскресенье</option>
-              </select>
-              <select id="slotSport">
-                <option value="sambo">Самбо</option>
-                <option value="karate">Карате</option>
-                <option value="boxing">Бокс</option>
-              </select>
-              <input type="text" id="slotTrainer" placeholder="Тренер">
-            </div>
-            <button class="btn-add" onclick="addSlot()">Добавить</button>
-          </div>
-          <div class="admin-section-title">ТЕКУЩЕЕ РАСПИСАНИЕ</div>
-          <table class="admin-table">
-            <thead>
-              <tr><th>День</th><th>Время</th><th>Секция</th><th>Тренер</th><th>Действия</th></tr>
-            </thead>
-            <tbody id="scheduleAdminBody"></tbody>
-          </table>
-        </div>
-
-        <div class="tab-content" id="tab-stats">
-          <div class="admin-section-title">СТАТИСТИКА КОМПЛЕКСА</div>
-          <div class="stats-boxes">
-            <div class="stat-box">
-              <div class="stat-box-num" id="statEnroll">0</div>
-              <div class="stat-box-label">Заявок всего</div>
-            </div>
-            <div class="stat-box">
-              <div class="stat-box-num" id="statTrainers">0</div>
-              <div class="stat-box-label">Тренеров</div>
-            </div>
-            <div class="stat-box">
-              <div class="stat-box-num" id="statSlots">0</div>
-              <div class="stat-box-label">Занятий в неделю</div>
-            </div>
-          </div>
-          <div class="stats-chart">
-            <div class="stats-chart-title">
-              Распределение по секциям
-            </div>
-            <div id="sportBars"></div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
 
 <!-- NOTIFICATION -->
 <div id="notification"></div>
@@ -497,7 +373,7 @@
 <!-- BACK TO TOP -->
 <button class="back-to-top" id="backToTop" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑</button>
 
-<script src="js/app.js?v=4"></script>
+<script src="js/app.js?v=5"></script>
 <script src="https://api-maps.yandex.ru/2.1/?lang=ru_RU"></script>
 <script>
 ymaps.ready(function() {
