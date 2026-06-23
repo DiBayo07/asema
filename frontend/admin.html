@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Алга — Панель Управления</title>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Oswald:wght@300;400;600;700&family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+  <style>
+    body, html { margin: 0; padding: 0; height: 100%; background: #f0f2f5; }
+    #adminModal { position: static; display: flex; min-height: 100vh; background: transparent; padding: 20px; box-sizing: border-box; }
+    .admin-panel { max-height: none; box-shadow: 0 10px 30px rgba(0,0,0,0.1); border-radius: 12px; margin: 0 auto; width: 100%; max-width: 1000px; }
+    .admin-close { display: none; }
+  </style>
+</head>
+<body>
+
+<div id="adminModal">
+  <div class="admin-panel">
+    <div class="admin-header">
+      <h2>ПАНЕЛЬ УПРАВЛЕНИЯ</h2>
+      <a href="index.html" style="display:flex; align-items:center; text-decoration:none; color:inherit; font-size:14px; opacity:0.8;">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="margin-right:6px;"><path d="M19 12H5M12 19l-7-7 7-7"/></svg> Назад на сайт
+      </a>
+    </div>
+
+    <div id="adminLogin" class="admin-login">
+      <h3>ВХОД В СИСТЕМУ</h3>
+      <p>Введите данные администратора для доступа к панели управления</p>
+      <div class="login-form">
+        <input type="text" id="loginUser" placeholder="Логин" value="admin">
+        <input type="password" id="loginPass" placeholder="Пароль">
+        <button class="login-btn" onclick="doLogin()">Войти</button>
+        <div class="login-error" id="loginError" style="display:none;">Неверный логин или пароль</div>
+      </div>
+    </div>
+
+    <div id="adminContent" class="admin-content-hidden">
+      <div class="admin-tabs">
+        <button class="admin-tab active" onclick="switchTab('applications', this)">Заявки</button>
+        <button class="admin-tab" onclick="switchTab('trainers', this)">Тренеры</button>
+        <button class="admin-tab" onclick="switchTab('schedule', this)">Расписание</button>
+        <button class="admin-tab" onclick="switchTab('stats', this)">Статистика</button>
+      </div>
+
+      <div class="admin-body">
+        <div class="tab-content active" id="tab-applications">
+          <div class="admin-section-title">ВХОДЯЩИЕ ЗАЯВКИ</div>
+          <table class="admin-table">
+            <thead>
+              <tr>
+                <th>#</th><th>Имя</th><th>Телефон</th>
+                <th>Секция</th><th>Возраст</th><th>Статус</th><th>Действия</th>
+              </tr>
+            </thead>
+            <tbody id="applicationsBody"></tbody>
+          </table>
+        </div>
+
+        <div class="tab-content" id="tab-trainers">
+          <div class="admin-add-form">
+            <h4>+ Добавить тренера</h4>
+            <div class="admin-form-row">
+              <input type="text" id="trName" placeholder="Имя тренера">
+              <select id="trSport">
+                <option value="sambo">Самбо</option>
+                <option value="karate">Карате</option>
+                <option value="boxing">Бокс</option>
+              </select>
+              <input type="text" id="trTitle" placeholder="Звание / титул">
+              <input type="text" id="trAchieve" placeholder="Достижение">
+            </div>
+            <button class="btn-add" onclick="addTrainer()">Добавить</button>
+          </div>
+          <div class="admin-section-title">СПИСОК ТРЕНЕРОВ</div>
+          <table class="admin-table">
+            <thead>
+              <tr><th>Имя</th><th>Секция</th><th>Звание</th><th>Достижение</th><th>Действия</th></tr>
+            </thead>
+            <tbody id="trainersAdminBody"></tbody>
+          </table>
+        </div>
+
+        <div class="tab-content" id="tab-schedule">
+          <div class="admin-add-form">
+            <h4>+ Добавить занятие</h4>
+            <div class="admin-form-row">
+              <input type="text" id="slotTime" placeholder="Время (09:00)">
+              <select id="slotDay">
+                <option value="Пн">Понедельник</option>
+                <option value="Вт">Вторник</option>
+                <option value="Ср">Среда</option>
+                <option value="Чт">Четверг</option>
+                <option value="Пт">Пятница</option>
+                <option value="Сб">Суббота</option>
+                <option value="Вс">Воскресенье</option>
+              </select>
+              <select id="slotSport">
+                <option value="sambo">Самбо</option>
+                <option value="karate">Карате</option>
+                <option value="boxing">Бокс</option>
+              </select>
+              <input type="text" id="slotTrainer" placeholder="Тренер">
+            </div>
+            <button class="btn-add" onclick="addSlot()">Добавить</button>
+          </div>
+          <div class="admin-section-title">ТЕКУЩЕЕ РАСПИСАНИЕ</div>
+          <table class="admin-table">
+            <thead>
+              <tr><th>День</th><th>Время</th><th>Секция</th><th>Тренер</th><th>Действия</th></tr>
+            </thead>
+            <tbody id="scheduleAdminBody"></tbody>
+          </table>
+        </div>
+
+        <div class="tab-content" id="tab-stats">
+          <div class="admin-section-title">СТАТИСТИКА КОМПЛЕКСА</div>
+          <div class="stats-boxes">
+            <div class="stat-box">
+              <div class="stat-box-num" id="statEnroll">0</div>
+              <div class="stat-box-label">Заявок всего</div>
+            </div>
+            <div class="stat-box">
+              <div class="stat-box-num" id="statTrainers">0</div>
+              <div class="stat-box-label">Тренеров</div>
+            </div>
+            <div class="stat-box">
+              <div class="stat-box-num" id="statSlots">0</div>
+              <div class="stat-box-label">Занятий в неделю</div>
+            </div>
+          </div>
+          <div class="stats-chart">
+            <div class="stats-chart-title">
+              Распределение по секциям
+            </div>
+            <div id="sportBars"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script src="js/admin_panel.js?v=1"></script>
+</body>
+</html>
