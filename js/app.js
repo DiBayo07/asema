@@ -137,38 +137,28 @@ document.querySelectorAll('.nav-links a').forEach(function(l) {
     document.querySelector('.nav-links').classList.remove('open');
   });
 });
-document.addEventListener('click', function(e) {
+function closeMenuOnOutsideClick(e) {
   const hamburger = document.getElementById('hamburger');
   const navLinks = document.querySelector('.nav-links');
   if (hamburger && navLinks && !hamburger.contains(e.target) && !navLinks.contains(e.target)) {
     hamburger.classList.remove('open');
     navLinks.classList.remove('open');
   }
-});
+}
+document.addEventListener('click', closeMenuOnOutsideClick);
+document.addEventListener('touchstart', closeMenuOnOutsideClick, {passive: true});
 
 async function doLogin() {
   const login = document.getElementById('loginUser').value.trim();
   const pass = document.getElementById('loginPass').value;
-  try {
-    const r = await fetch('/api/login', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ login, password: pass })
-    });
-    const data = await r.json();
-    if (data.ok) {
-      document.getElementById('adminLogin').style.display = 'none';
-      document.getElementById('adminContent').style.display = 'block';
-      renderAll();
-    } else if (data.error === 'blocked') {
-      document.getElementById('loginError').textContent = 'Доступ заблокирован на ' + data.minutes + ' мин.';
-      document.getElementById('loginError').style.display = 'block';
-    } else {
-      document.getElementById('loginError').textContent = 'Неверный логин или пароль';
-      document.getElementById('loginError').style.display = 'block';
-    }
-  } catch (e) {
-    document.getElementById('loginError').textContent = 'Ошибка подключения';
+  // Local mock login for GitHub Pages
+  if (login === 'admin' && pass === 'admin') {
+    document.getElementById('adminLogin').style.display = 'none';
+    document.getElementById('adminContent').style.display = 'block';
+    document.getElementById('loginError').style.display = 'none';
+    renderAll();
+  } else {
+    document.getElementById('loginError').textContent = 'Неверный логин или пароль (используйте admin/admin)';
     document.getElementById('loginError').style.display = 'block';
   }
 }
