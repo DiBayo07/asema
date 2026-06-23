@@ -126,7 +126,8 @@ function closeAdmin() {
 }
 
 // Hamburger
-document.getElementById('hamburger').addEventListener('click', function() {
+document.getElementById('hamburger').addEventListener('click', function(e) {
+  e.stopPropagation();
   this.classList.toggle('open');
   document.querySelector('.nav-links').classList.toggle('open');
 });
@@ -135,6 +136,14 @@ document.querySelectorAll('.nav-links a').forEach(function(l) {
     document.getElementById('hamburger').classList.remove('open');
     document.querySelector('.nav-links').classList.remove('open');
   });
+});
+document.addEventListener('click', function(e) {
+  const hamburger = document.getElementById('hamburger');
+  const navLinks = document.querySelector('.nav-links');
+  if (hamburger && navLinks && !hamburger.contains(e.target) && !navLinks.contains(e.target)) {
+    hamburger.classList.remove('open');
+    navLinks.classList.remove('open');
+  }
 });
 
 async function doLogin() {
