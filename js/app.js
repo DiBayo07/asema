@@ -1,5 +1,15 @@
 const API_URL = 'http://localhost:5000';
 
+const SUPABASE_URL = 'https://egbiowrgdhudxmdytmfu.supabase.co/rest/v1/applications';
+const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImVnYmlvd3JnZGh1ZHhtZHl0bWZ1Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODIyMjUyNzAsImV4cCI6MjA5NzgwMTI3MH0.CG2GFXORqUyR_xu5Ci0KyOFO86fZADQE-ScM3riBr_I';
+const SUPABASE_HEADERS = {
+  'apikey': SUPABASE_KEY,
+  'Authorization': 'Bearer ' + SUPABASE_KEY,
+  'Content-Type': 'application/json',
+  'Prefer': 'return=representation'
+};
+
+let applicationsCache = [];
 let currentAge = 'kids';
 let currentTrainerFilter = 'all';
 
@@ -298,8 +308,61 @@ function switchTab(name, btn) {
   btn.classList.add('active');
 }
 
+async function loadApplicationsAdmin() {
+  try {
+    const res = await fetch(SUPABASE_URL + '?select=*', { headers: SUPABASE_HEADERS });
+    if (res.ok) {
+      applicationsCache = await res.json();
+      renderApplicationsAdmin();
+      renderStats();
+    }
+  } catch(e) {}
+}
+
+function renderApplicationsAdmin() {
+  const body = document.getElementById('applicationsBody');
+  if (!body) return;
+  const STATUS_TEXT = { new: 'Новая', done: 'Готово', called: 'Звонили' };
+  body.innerHTML = applicationsCache.map(a => {
+    const statusClass = a.status === 'new' ? 'badge-new' : a.status === 'done' ? 'badge-done' : 'badge-called';
+    const statusText = STATUS_TEXT[a.status] || a.status;
+    return `<tr>
+      <td>${a.id}</td>
+      <td>${a.name}</td>
+      <td><a href="tel:${a.phone}">${a.phone}</a></td>
+      <td><span class="sport-badge">${a.sport}</span></td>
+      <td>${a.age || '-'}</td>
+      <td><span class="badge ${statusClass}">${statusText}</span></td>
+      <td>
+        <button class="admin-action-btn edit" onclick="updateAppStatus(${a.id}, 'done')" title="Готово">✔</button>
+        <button class="admin-action-btn call" onclick="updateAppStatus(${a.id}, 'called')" title="Звонили">📞</button>
+        <button class="admin-action-btn delete" onclick="deleteApp(${a.id})" title="Удалить">✖</button>
+      </td>
+    </tr>`;
+  }).join('');
+}
+
+async function updateAppStatus(id, status) {
+  try {
+    await fetch(SUPABASE_URL + '?id=eq.' + id, {
+      method: 'PATCH',
+      headers: SUPABASE_HEADERS,
+      body: JSON.stringify({ status })
+    });
+    loadApplicationsAdmin();
+  } catch (e) {}
+}
+
+async function deleteApp(id) {
+  if(!confirm('Удалить заявку?')) return;
+  try {
+    await fetch(SUPABASE_URL + '?id=eq.' + id, { method: 'DELETE', headers: SUPABASE_HEADERS });
+    loadApplicationsAdmin();
+  } catch (e) {}
+}
+
 function renderStats() {
-  const apps = JSON.parse(localStorage.getItem('applications') || '[]');
+  const apps = applicationsCache;
   const se = document.getElementById('statEnroll');
   const st = document.getElementById('statTrainers');
   const ss = document.getElementById('statSlots');
@@ -327,7 +390,7 @@ function renderAll() {
   renderTrainersAdmin();
   renderSchedule();
   renderScheduleAdmin();
-  renderStats();
+  loadApplicationsAdmin();
 }
 
 function animateCounter(id, target) {
