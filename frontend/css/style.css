@@ -1465,4 +1465,7 @@ footer { background: var(--text-dark); padding: 60px 80px 32px; }
   .gallery-item { min-width: 150px; height: 120px; }
 }
 
-@media (min-width: 900px) { .mobile-only { display: none !important; } }
+.mobile-only { display: none !important; }
+@media (max-width: 768px) {
+  .mobile-only { display: block !important; }
+}
