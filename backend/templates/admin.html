@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Панель управления — АЛГА</title>
+  <link rel="stylesheet" href="/css/admin.css">
+</head>
+<body>
+
+<div class="sidebar-overlay" id="sidebarOverlay" onclick="closeSidebar()"></div>
+
+<aside class="sidebar" id="sidebar">
+  <div class="sidebar-brand">
+    <h1>АЛГА</h1>
+    <p>Панель управления</p>
+  </div>
+  <nav class="sidebar-nav">
+    <a class="sidebar-link active" href="#" onclick="switchTab('dashboard', this); return false">
+      <svg viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/></svg>
+      <span>Дашборд</span>
+    </a>
+    <a class="sidebar-link" href="#" onclick="switchTab('applications', this); return false">
+      <svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+      <span>Заявки</span>
+    </a>
+    <a class="sidebar-link" href="#" onclick="switchTab('trainers', this); return false">
+      <svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+      <span>Тренеры</span>
+    </a>
+    <a class="sidebar-link" href="#" onclick="switchTab('stats', this); return false">
+      <svg viewBox="0 0 24 24"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>
+      <span>Статистика</span>
+    </a>
+  </nav>
+  <div class="sidebar-footer">
+    <button class="theme-toggle" onclick="toggleTheme()">
+      <svg viewBox="0 0 24 24" id="themeIcon"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+      <span id="themeLabel">Тёмная тема</span>
+    </button>
+    <a href="/">
+      <svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+      <span>На сайт</span>
+    </a>
+    <a href="/admin/logout">
+      <svg viewBox="0 0 24 24"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>
+      <span>Выйти</span>
+    </a>
+  </div>
+</aside>
+
+<main class="main">
+
+  <button class="hamburger" id="hamburger" onclick="toggleSidebar()">
+    <span></span><span></span><span></span>
+  </button>
+
+  <!-- DASHBOARD TAB -->
+  <div id="tab-dashboard" class="tab-content" style="display:block">
+    <div class="page-header">
+      <div>
+        <h2>Дашборд</h2>
+        <p>Управление спортивным комплексом</p>
+      </div>
+    </div>
+
+    <div class="stats">
+      <div class="stat-card">
+        <div class="stat-card-header">
+          <svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
+        </div>
+        <div class="stat-value" id="s-total">-</div>
+        <div class="stat-label">Всего заявок</div>
+      </div>
+      <div class="stat-card new-card">
+        <div class="stat-card-header">
+          <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+        </div>
+        <div class="stat-value" id="s-new">-</div>
+        <div class="stat-label">Новых</div>
+      </div>
+      <div class="stat-card done-card">
+        <div class="stat-card-header">
+          <svg viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+        </div>
+        <div class="stat-value" id="s-done">-</div>
+        <div class="stat-label">Обработано</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- APPLICATIONS TAB -->
+  <div id="tab-applications" class="tab-content" style="display:none">
+    <div class="page-header">
+      <div>
+        <h2>Заявки</h2>
+        <p>Входящие заявки на запись</p>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-header">
+        <div class="card-title">Входящие заявки</div>
+      </div>
+      <div class="card-body">
+        <div class="table-wrap">
+          <table>
+            <thead><tr>
+              <th>N</th><th>Дата</th><th>Имя</th><th>Телефон</th><th>Секция</th><th>Возраст</th><th>Комментарий</th><th>Статус</th><th>Действия</th>
+            </tr></thead>
+            <tbody id="tbody"></tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- TRAINERS TAB -->
+  <div id="tab-trainers" class="tab-content" style="display:none">
+    <div class="page-header">
+      <div>
+        <h2>Тренеры</h2>
+        <p>Управление тренерским составом</p>
+      </div>
+    </div>
+    <div class="card" style="margin-bottom:20px">
+      <div class="card-header">
+        <div class="card-title">Добавить тренера</div>
+      </div>
+      <div class="card-body">
+        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:12px;margin-bottom:12px">
+          <input type="text" id="trName" placeholder="Имя тренера" class="admin-input">
+          <select id="trSport" class="admin-input">
+            <option value="sambo">Самбо</option>
+            <option value="karate">Карате</option>
+            <option value="boxing">Бокс</option>
+          </select>
+          <input type="text" id="trTitle" placeholder="Звание / титул" class="admin-input">
+          <input type="text" id="trAchieve" placeholder="Достижение" class="admin-input">
+          <input type="text" id="trPhoto" placeholder="Путь к фото (images/photo.jpg)" class="admin-input">
+        </div>
+        <button class="btn btn-done" onclick="addTrainer()" style="padding:10px 24px;font-size:0.78rem">Добавить</button>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-header">
+        <div class="card-title">Список тренеров</div>
+      </div>
+      <div class="card-body">
+        <div class="table-wrap">
+          <table>
+            <thead><tr><th>Фото</th><th>Имя</th><th>Секция</th><th>Звание</th><th>Достижение</th><th>Действия</th></tr></thead>
+            <tbody id="trainersBody"></tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  
+  <!-- STATS TAB -->
+  <div id="tab-stats" class="tab-content" style="display:none">
+    <div class="page-header">
+      <div>
+        <h2>Статистика</h2>
+        <p>Распределение заявок по секциям</p>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-body" id="sportBars"></div>
+    </div>
+  </div>
+
+</main>
+
+<script src="/js/admin.js"></script>
+</body>
+</html>
